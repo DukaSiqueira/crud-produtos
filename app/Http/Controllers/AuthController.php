@@ -30,24 +30,4 @@ class AuthController extends Controller
 
         return response()->json(['token' => $token]);
     }
-
-    /** Retorna o usuário autenticado
-     * @return JsonResponse
-    */
-    public function getAuthenticatedUser(): JsonResponse
-    {
-        try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (TokenExpiredException $e) {
-            return response()->json(['token_expired'], $e->getCode());
-        } catch (TokenInvalidException $e) {
-            return response()->json(['token_invalid'], $e->getCode());
-        } catch (JWTException $e) {
-            return response()->json(['token_absent'], $e->getCode());
-        }
-
-        return response()->json(compact('user'));
-    }
 }
