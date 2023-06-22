@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('registros', [\App\Http\Controllers\TasksController::class, 'index']);
-Route::get('registros/{id}', [\App\Http\Controllers\TasksController::class, 'show']);
+Route::post('login', [AuthController::class, 'authenticate']);
+Route::middleware('auth:api')->get('user', [AuthController::class, 'getAuthenticatedUser']);
