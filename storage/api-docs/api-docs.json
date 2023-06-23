@@ -1,0 +1,406 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gerenciador de Tarefas - API para controle e organização das suas atividades",
+        "description": "A API de Gerenciamento de Tarefas é uma solução que permite o controle completo das tarefas, permitindo a realização das operações de CRUD (Criar, Ler, Atualizar e Excluir). Com essa API, os usuários podem criar novas tarefas, visualizar todas as tarefas existentes, atualizar informações de tarefas específicas e também remover tarefas quando necessário. É uma ferramenta essencial para o gerenciamento eficiente e organizado das atividades diárias, proporcionando uma maneira simplificada de lidar com as tarefas e melhorar a produtividade.\n",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Autentica o usuário e gera um token",
+                "description": "Após a autenticação bem-sucedida, o token gerado deve ser inserido no cabeçalho das solicitações para acessar os recursos protegidos da API. O cabeçalho deve ter o seguinte formato:\n`Authorization: Bearer <token>`\nSubstitua `<token>` pelo token gerado após a autenticação.\n",
+                "operationId": "6228675d822707f39f797a080f313585",
+                "requestBody": {
+                    "description": "Dados de autenticação",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "liberfly@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "liberfly123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token gerado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token de acesso",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Credenciais inválidas"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha ao criar o token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Falha ao criar o token"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/task": {
+            "get": {
+                "tags": [
+                    "Recursos de Tarefas"
+                ],
+                "summary": "Retorna todas as tarefas",
+                "operationId": "fce13e32fd08d7a90c6063e44982b215",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Recursos de Tarefas"
+                ],
+                "summary": "Cria uma nova tarefa",
+                "operationId": "2e4af1667c94e5d2b6e82e43ea6658af",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+        },
+        "/task/{id}": {
+            "get": {
+                "tags": [
+                    "Recursos de Tarefas"
+                ],
+                "summary": "Recupera uma tarefa específica",
+                "operationId": "fd3677b5b24695d7b801715869b1357c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Recursos de Tarefas"
+                ],
+                "summary": "Atualiza uma tarefa específica",
+                "operationId": "85377ff0e935f093dd75ea6886923dbc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskRequest"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Recursos de Tarefas"
+                ],
+                "summary": "Remove uma tarefa específica",
+                "operationId": "af03217cb3f3fa2202f0b84dabe37be4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da tarefa",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "BearerAuth": []
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "Task": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Upgrade PC"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Analisar peças para fazer upgrade no PC"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "completed"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2023-06-22T23:32:05.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "example": "2023-06-22T23:32:05.000000Z"
+                    }
+                }
+            },
+            "TaskListResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "Success"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Task"
+                        }
+                    }
+                },
+                "example": {
+                    "status": "Success",
+                    "data": [
+                        {
+                            "id": 1,
+                            "title": "Estudos front-end",
+                            "description": "Dar continuidade ao estudos de front-end",
+                            "status": "completed",
+                            "created_at": "2023-06-22T23:32:05.000000Z",
+                            "updated_at": "2023-06-22T23:32:05.000000Z"
+                        },
+                        {
+                            "id": 2,
+                            "title": "Treinar",
+                            "description": "Ir para academia as 21:00",
+                            "status": "pending",
+                            "created_at": "2023-06-22T23:33:12.000000Z",
+                            "updated_at": "2023-06-22T23:33:12.000000Z"
+                        }
+                    ]
+                }
+            },
+            "TaskRequest": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Leitura"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Ler no mínimo 15 minutos"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "completed"
+                    }
+                }
+            },
+            "SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "Success"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Tarefa deletada com sucesso!"
+                    }
+                }
+            }
+        }
+    }
+}

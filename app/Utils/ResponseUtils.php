@@ -27,12 +27,12 @@ class ResponseUtils
     /**
      * Verifica se as tasks foram encontradas e retorna a resposta JSON apropriada.
      * @param $tasks
-     * @return array
+     * @return Collection
      * @throws TaskNotFound
      */
-    public static function checkTaskArray($tasks): array
+    public static function checkTaskArray($tasks): Collection
     {
-        if ($tasks['tasks']->isEmpty()) {
+        if ($tasks->isEmpty()) {
             throw new TaskNotFound();
         }
 

@@ -10,6 +10,7 @@ use App\Utils\ResponseUtils;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
 class TaskController extends Controller
 {
@@ -125,7 +126,7 @@ class TaskController extends Controller
             $task->delete();
 
             // Retorna uma mensagem de sucesso
-            return ResponseUtils::successResponse("Task deletada com sucesso!", 200);
+            return ResponseUtils::successResponse("Tarefa deletada com sucesso!", 200);
         } catch (TaskNotFound $ex) {
             return ResponseUtils::errorResponse($ex->getMessage(), 404);
         } catch (\Exception $ex) {
