@@ -50,7 +50,7 @@ Não foi disponibilizado os recursos para cadastrar novos users, porém, ao roda
     
     | Nome | E-mail | Password |
     | --- | --- | --- |
-    | Liberfly User | mailto:User,libuser@example.comibuser@example.com | liberfly123 |
+    | Liberfly User | libuser@example.com | liberfly123 |
     | Liberfly Test | libtest@example.com | 1liber2fly3 |
 - 5 tarefas:
     
