@@ -37,7 +37,8 @@ Para rodar o projeto, é necessário ter:
 
 Para executar os testes de integração, utilize o comando `php artisan test --testsuite=Feature`. 
 
-Obs.: Poderia ser criado um ambiente de teste, mas para facilitar o desenvolvimento utilizei o banco local de desenvolvimento.
+**CONSIDERAÇÃO:** Poderia ser criado um ambiente de teste, mas para facilitar o desenvolvimento utilizei o banco local de desenvolvimento.
+**OBSERVAÇÃO:** Ao rodar os testes de integração o comando `php artisan db:seed` deve ser rodado novamente, por utilizar o mesmo banco para desenvolver e testar os testes zeram o banco ao terminar de executar.
 
 ### Adicional - Testes
 
@@ -62,8 +63,6 @@ Não foi disponibilizado os recursos para cadastrar novos users, porém, ao roda
     | Janta amigos | Jantar com amigos as 22:00 | pending |
     | Remédio | Tomar remédio as 12:00 | pending |
     | Trabalho faculdade | Trabalho de conclusão de curso | pending |
-
-**OBSERVAÇÃO:** Ao rodar os testes de integração o comando `php artisan db:seed` deve ser rodado novamente, por utilizar o mesmo banco para desenvolver e testar os testes zeram o banco ao terminar de executar.
 
 ## Documentação
 
