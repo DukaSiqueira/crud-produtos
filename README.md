@@ -8,7 +8,7 @@ O aplicativo foi desenvolvido utilizando o framework Laravel 10 e utiliza o banc
 
 ### Requisitos
 
-Para rodar o projeto, é necessário ter as seguintes extensões PHP:
+Para rodar o projeto, é necessário:
 
 - PHP >= 8.0
 - MySQL 5.7 ou superior
