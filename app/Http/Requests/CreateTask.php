@@ -14,6 +14,7 @@ class CreateTask extends FormRequest
         return true;
     }
 
+    // Define os atributos que serão validados e suas regras
     public function rules(): array
     {
         return [
@@ -22,6 +23,7 @@ class CreateTask extends FormRequest
         ];
     }
 
+    // Define os mensagens de erro
     public function messages(): array
     {
         return [
@@ -37,6 +39,7 @@ class CreateTask extends FormRequest
         ];
     }
 
+    // Tratamento dos erros de validação
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($validator->errors(),  422));

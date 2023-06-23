@@ -6,10 +6,10 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class TaskNotFound extends Exception
+class TaskNotFoundException extends Exception
 {
     public function __construct()
     {
-        parent::__construct('Task not found');
+        parent::__construct('Registro(s) não encontrado(s).');
     }
 }

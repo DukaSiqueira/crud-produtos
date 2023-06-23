@@ -27,7 +27,7 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = ['password','remember_token',];
 
     /**
-     * Muda a forma como os campos são exibidos.
+     * Muda como os campos são exibidos.
      *
      * @var array<string, string>
      */

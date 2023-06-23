@@ -14,15 +14,17 @@ class UpdateTask extends FormRequest
         return true;
     }
 
+    // Define os atributos que serão validados e suas regras
     public function rules(): array
     {
         return [
-            'title' => 'required|string|unique:tasks|min:3|max:255',
-            'description' => 'required|string|min:4|max:255',
-            'status' => 'required|string',
+            'title' => 'string|unique:tasks|min:3|max:255',
+            'description' => 'string|min:4|max:255',
+            'status' => 'string|in:pending,completed',
         ];
     }
 
+    // Define os mensagens de erro
     public function messages(): array
     {
         return [
@@ -41,6 +43,7 @@ class UpdateTask extends FormRequest
         ];
     }
 
+    // Tratamento dos erros de validação
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($validator->errors(),  422));
