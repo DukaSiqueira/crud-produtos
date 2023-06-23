@@ -1,7 +1,5 @@
 # Gerenciamento de Tarefas
 
----
-
 Este projeto consiste em um gerenciador de tarefas, onde é possível criar, editar, ler e excluir as mesmas. É uma ferramenta essencial para o gerenciamento eficiente e organizado das atividades diárias, proporcionando uma maneira simplificada de lidar com as tarefas e melhorar a produtividade.
 
 ### Especificações
