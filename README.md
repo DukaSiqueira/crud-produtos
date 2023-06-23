@@ -28,10 +28,10 @@ Para rodar o projeto, é necessário ter:
 
 *``DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD``*
 
-1. Execute o comando `php artisan key:generate` para gerar a chave da aplicação.
-2. Execute o comando `php artisan jwt:secret` para gerar a senha secreta de autenticação JWT.
-3. Execute o comando `php artisan migrate` para criar as tabelas do banco de dados.
-4. Execute o comando `php artisan db:seed` para popular o banco de dados com dados iniciais.
+6. Execute o comando `php artisan key:generate` para gerar a chave da aplicação.
+7. Execute o comando `php artisan jwt:secret` para gerar a senha secreta de autenticação JWT.
+8. Execute o comando `php artisan migrate` para criar as tabelas do banco de dados.
+9. Execute o comando `php artisan db:seed` para popular o banco de dados com dados iniciais.
 
 ## Executando os testes
 
