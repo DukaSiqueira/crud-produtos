@@ -6,6 +6,10 @@ Este projeto consiste em um gerenciador de tarefas, onde é possível criar, edi
 
 O aplicativo foi desenvolvido utilizando o framework Laravel 10 e utiliza o banco de dados MySQL. A autenticação é realizada via JWT, utilizando a biblioteca Tymon e sua documentação foi escrita em Swagger.
 
+### Detalhes do projeto
+
+O padrão utilizado no projeto é o MVC, mas não conta com front-end, apenas a documentação em Swagger utiliza a camada View. Foram criadas algumas classes personalizadas para lidar com as requisições, incluindo validações e exceções customizadas.
+
 ### Requisitos
 
 Para rodar o projeto, é necessário:
