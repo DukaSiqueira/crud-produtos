@@ -46,7 +46,7 @@ class TaskController extends Controller
                 'description' => $validated['description'],
             ]);
 
-            return ResponseUtils::response('Success', $task, 200);
+            return ResponseUtils::response('Success', $task, 201);
         } catch (\Exception $ex) {
             return ResponseUtils::response('Error', $ex->getMessage(), 500);
         }
