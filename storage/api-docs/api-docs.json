@@ -135,7 +135,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/TaskRequest"
+                                "$ref": "#/components/schemas/TaskRequestCreate"
                             }
                         }
                     }
@@ -220,7 +220,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/TaskRequest"
+                                "$ref": "#/components/schemas/TaskRequestEdit"
                             }
                         }
                     }
@@ -371,7 +371,20 @@
                     ]
                 }
             },
-            "TaskRequest": {
+            "TaskRequestCreate": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Leitura"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Ler no mínimo 15 minutos"
+                    }
+                }
+            },
+            "TaskRequestEdit": {
                 "type": "object",
                 "properties": {
                     "title": {

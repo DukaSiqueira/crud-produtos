@@ -17,8 +17,6 @@ class TaskManagementTest extends TestCase
 
     /**
      * Gera um token JWT para o usuário de teste.
-     * OBS.: Na tentativa de reutilizar a função authenticate do AuthController, obtive erros que não consequi solucionar
-     * tive que duplicar a lógica para o cenário de teste.
      * @param User $user
      * @return string|false
      */
@@ -52,6 +50,42 @@ class TaskManagementTest extends TestCase
 
         // Verifica se a resposta retorna um estado 401 (não autorizado)
         $response->assertStatus(401);
+    }
+
+    /**
+     * Teste de listagem de tarefas
+     * @return void
+     */
+    public function testIndex(): void
+    {
+        // Cria um usuário de teste
+        $user = User::factory()->create([
+            'email' => 'liberfly@test.com',
+            'password' => Hash::make('1liber2fly3'),
+        ]);
+
+        // Gera um token JWT para o usuário de teste
+        $token = $this->generateJwtToken($user);
+
+        // Cria algumas tarefas para testar
+        Task::factory()->count(3)->create();
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->get('/api/task');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'status',
+            'data',
+        ]);
+
+        $responseData = $response->json();
+        $this->assertEquals('Success', $responseData['status']);
+
+        // Verifica se os dados das tarefas foram retornados corretamente
+        $this->assertArrayHasKey('data', $responseData);
+        $this->assertCount(3, $responseData['data']);
     }
 
     /**
