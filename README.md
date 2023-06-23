@@ -26,7 +26,7 @@ Para rodar o projeto, é necessário ter:
 4. Crie uma cópia do arquivo `.env.example` e renomeie para `.env`. 
 5. Configure as variáveis de ambiente relacionadas ao banco de dados com as informações do banco criado. As variáveis são: 
 
-*``DB_CONNECTION, DB_HOST,``**`DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD`*
+*``DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD``*
 
 1. Execute o comando `php artisan key:generate` para gerar a chave da aplicação.
 2. Execute o comando `php artisan jwt:secret` para gerar a senha secreta de autenticação JWT.
